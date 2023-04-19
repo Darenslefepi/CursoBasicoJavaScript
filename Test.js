@@ -25,7 +25,7 @@ Deudas = "Number"
 */
 var nombre = "Andres Felipe";
 var apellido = "Giraldo Garcia";
-var UsuarioPlazit = "darenslefepi";
+var UsuarioPlazit = "@darenslefepi";
 var edad = 39;
 var email = "felipe.afgg@gmail.com";
 var adulto = true;
@@ -48,7 +48,7 @@ flujoCaja
 /* Funciones
 1️⃣ Responde las siguientes preguntas en la sección de comentarios:
 ¿Qué es una función?
-es un conjunto de instruciones que tomando ciertos valores devuelve u resultado y tiene la capacidad de ser reutilizada en cualquier parte del codigo solo invocandola, ejemplo de incocacion myfuncion()
+es un conjunto de instruciones (bloque de codigo) que tomando ciertos valores devuelve u resultado y tiene la capacidad de ser reutilizada en cualquier parte del codigo solo invocandola, ejemplo de incocacion myfuncion()
 ¿Cuándo me sirve usar una función en mi código?
 cuando voy a repetir muchas veces el mismo procedimiento, es mejor crear una funcion que haga este 
 ¿Cuál es la diferencia entre parámetros y argumentos de una función?
@@ -79,11 +79,13 @@ saludo("andres Felipe", "Giraldo Garcia", "Darenslefepi")
 Es una expresion que nos permite evaluar si algo es true o false
 ¿Qué tipos de condicionales existen en JavaScript y cuáles son sus diferencias?
 hay 4 if, switch los cuales preguntan si algo es verdad y si alguno lo es termina el ciclo y arroja el resultado, si ninguno es verdad, igual termina el ciclo, y la diferencia entre estos dos es que switch se sugiere para busquedas mucho mas grandes, ya por otro lado esta for y while los cuales pueden crear bucles infinitos si no le colocamos un final ya que se repetiran por siempre como decir while (num < 0) {num ++}, esto seria infinito, ya que nun nuca seria menor que 0
+IF (else y else if), Switch
+El codicional if (con el se y else if) nos permite hacer validaciones completamente distintas (si así queremos) en cada validación o condional. En cambio, en el switch todos los cases se comparan con la misma variable o condición que definimos en el switch.
 ¿Puedo combinar funciones y condicionales?
 si, y esto se crea para crear mas logica a los programas.
 2️⃣ Replica el comportamiento del siguiente código que usa la sentencia switch utilizando if, else y else if:
 */
-const tipoDeSuscripcion = "Expert";
+const tipoDeSuscripcion = "Free";
 
 switch (tipoDeSuscripcion) {
    case "Free":
@@ -117,6 +119,31 @@ if (tipoDeSuscripcion == "Free") {
 3️⃣ Replica el comportamiento de tu condicional anterior con if, else y else if, pero ahora solo con if (sin else ni else if).
 💡 Bonus: si ya eres una experta o experto en el lenguaje, te desafío a comentar cómo replicar este comportamiento con arrays u objetos y un solo condicional. 😏
 */
+// solo on if 
+var suscripcion = "Basic";
+function conseguirTipoSuscripcion(suscripcion) {
+    if (suscripcion == 'Free') {
+        console.log("Solo puedes tomar los cursos gratis");
+        return;
+    }
+    
+    if (suscripcion == 'Basic') {
+        console.log("Puedes tomar casi todos los cursos de Platzi durante un mes");
+        return;
+    }
+    
+    if (suscripcion == 'Expert') {
+        console.log("Puedes tomar casi todos los cursos de Platzi durante un año");
+        return;
+    }
+    
+    if (suscripcion == 'ExpertDuo') {
+        console.log("Tú y alguien más pueden tomar TODOS los cursos de Platzi durante un año");
+        return;
+    }
+
+    console.warn('Ese tipo de suscripción no existe')
+}
 /* if (tipoDeSuscripcion == "Free" || tipoDeSuscripcion == "Basic" || tipoDeSuscripcion == "Expert" || tipoDeSuscripcion == "ExpertPlus") {
     console.log("Puedes tomar los cursos de Plazit");
 } */
@@ -139,12 +166,33 @@ let typeSuscripción = [
       }
     }
 
+
+    //otra mejor
+
+    const tiposDeSuscripciones = {
+        free: 'Solo puedes tomar los cursos gratis',
+        basic: 'Puedes tomar casi todos los cursos de Platzi durante un mes',
+        expert: 'Puedes tomar casi todos los cursos de Platzi durante un año',
+        expertduo: 'Tú y alguien más pueden tomar TODOS los cursos de Platzi durante un año',
+    };
+    
+    function conseguirTipoSuscripcion(suscripcion) {
+        if (tiposDeSuscripciones[suscripcion]) {
+            console.log(tiposDeSuscripciones[suscripcion]);
+            return;
+        }
+    
+        console.warn('Ese tipo de suscripción no existe')
+    }
+
+    console.log(conseguirTipoSuscripcion('free'))
+
 /* Ciclos
 1️⃣ Responde las siguientes preguntas en la sección de comentarios:
 ¿Qué es un ciclo?
 es un procedimiento que se repite de forma infinita mientras no tenga algun condicional que lo detenga
 ¿Qué tipos de ciclos existen en JavaScript?
-existen el ciclo for y while
+existen el ciclo for, for each y while, do while
 ¿Qué es un ciclo infinito y por qué es un problema?
 es un procedimiento que nunca terminaria y puede bloquear nuestro computador al consumir toda su memoria ram
 ¿Puedo mezclar ciclos y condicionales?
@@ -156,8 +204,8 @@ for (let i = 0; i < 5; i++) {
 }
 var i = 0;
 while (i < 5) {
-    i++;
     console.log("El valor de i es: " + i);
+    i++;
 } 
 
 for (let i = 10; i >= 2; i--) {
@@ -165,28 +213,27 @@ for (let i = 10; i >= 2; i--) {
 }
 var i = 10;
 while (i >= 2) {
-    i--;
     console.log("El valor de i es: " + i);
+    i--;
 }
 /*
 3️⃣ Escribe un código en JavaScript que le pregunte a los usuarios cuánto es 2 + 2. Si responden bien, mostramos un mensaje de felicitaciones, pero si responden mal, volvemos a empezar.
 💡 Pista: puedes usar la función prompt de JavaScript.
 */
-var usuario = prompt("Cuanto es 2 + 2:")
-var respuesta = 4
+let usuario 
+let respuesta = 4
 function validacion(usuario, respuesta) {
-    while(usuario === respuesta) {
-        return ("muy bien felicitaciones")
-        
-    }
+    while (usuario != respuesta) {
+        usuario = prompt("Cuanto es 2 + 3:");
+    } alert("felicitaciones")
     
 }
-console.log(validacion(4, 4))
+console.log(validacion(4, 4)) /* con la funcion puedo cambiar los numeros */
 
 /* Listas
 1️⃣ Responde las siguientes preguntas en la sección de comentarios:
 ¿Qué es un array?
-Es una variable con un conjunto de datos de cualquier tipo, y no tienen limites para almacenar, y el cual puede ser recorrido para buscar sus elementos 
+Es una variable con un conjunto de datos de cualquier tipo, y no tienen limites para almacenar elementos, y el cual puede ser recorrido para buscar sus elementos 
 ¿Qué es un objeto?
 es un variable que puede guardar atributos y valores de como el mismo nombre lo dice un objeto, ejmplo un carro, el cual tiene llantas 4, color azul, modelo 2030, etc
 ¿Cuándo es mejor usar objetos o arrays?
@@ -221,6 +268,11 @@ function mascotaIndicada() {
     return primerElemento
 }
 console.log(mascotaIndicada())
+
+function basica() {
+    return(mascota[0])
+}
+console.log(basica())
 /*
 3️⃣ Crea una función que pueda recibir cualquier array como parámetro e imprima todos sus elementos uno por uno (no se vale imprimir el array completo).
 */
@@ -246,4 +298,12 @@ function heroe(gottan) {
     }
 }
 heroe(disfraz)
+
+var atributo = Object.keys(disfraz);
+atributo
+unoAlavez(atributo)
+
+var valor = Object.values(disfraz);
+valor
+unoAlavez(valor)
 
